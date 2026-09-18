@@ -84,5 +84,6 @@ Uses included:
 - Reviewing the repo for any gaps/discrepancies
 - Understanding and implementing syntax for FastAPI, joblib etc (libraries I was previously unfamiliar with)
 - Assisting in the writing of checking and data generation Python scripts
+- Formatting my writeup in Typst
 
 All commands were executed manually. All the output in `evidence/` and logs was captured on my machine. AI assistents were used as a debugging, verification and editing aid.
