@@ -1,0 +1,39 @@
+.dockerignore contents (current):
+__pycache__/
+*.pyc
+outputs.md
+spam_dataset.csv
+model.joblib
+evidence/
+k8s/
+.git
+*.md
+
+Commands run, in order:
+$ cat > .dockerignore << 'EOF'
+(contents above)
+EOF
+$ mv .dockerignore .dockerignore2
+$ docker builder prune -af
+(cache-ID list omitted — not meaningful evidence; ends with "Total: 4.739GB" reclaimed)
+
+BEFORE (.dockerignore renamed away, cache just pruned so context is re-transferred fresh):
+$ docker build -t spam-api-multistage -f Dockerfile.multistage .
+ => [internal] load .dockerignore                                                   0.0s
+ => => transferring context: 2B                                                     0.0s
+ => [internal] load build context                                                   0.0s
+ => => transferring context: 3.05kB                                                 0.0s
+
+$ mv .dockerignore2 .dockerignore
+$ docker builder prune -af
+(cache-ID list omitted — not meaningful evidence; ends with "Total: 1.417GB" reclaimed)
+
+AFTER (.dockerignore restored, cache pruned again so context is re-transferred fresh):
+$ docker build -t spam-api-multistage -f Dockerfile.multistage .
+ => [internal] load .dockerignore                                                   0.0s
+ => => transferring context: 125B                                                   0.0s
+ => [internal] load build context                                                   0.0s
+ => => transferring context: 3.05kB                                                 0.0s
+
+Note:
+"load build context" figure (3.05kB) is unchanged between the runs. Dockerfile.multistage only explicitly does COPY on requirements.txt, generate_random_dataset.py, train_model.py, and app.py. The build context was already small here. Removing .dockerignore did not change what was sent to the daemon here. The value is guaranteeing that spam_dataset.csv, model.joblib, outputs.md, evidence/, k8s/, and .git are never included in the build context. This matters more only as the repo grows or if the build is run from a directory containing more/larger files.

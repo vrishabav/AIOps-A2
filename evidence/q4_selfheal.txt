@@ -1,0 +1,12 @@
+$ kubectl get pods -l app=spam-api
+NAME                        READY   STATUS    RESTARTS   AGE
+spam-api-6f567468bb-jmgs8   1/1     Running   0          63m
+spam-api-6f567468bb-rlbhw   1/1     Running   0          55m
+
+$ kubectl delete pod spam-api-6f567468bb-rlbhw
+pod "spam-api-6f567468bb-rlbhw" deleted from default namespace
+
+$ kubectl get pods -l app=spam-api
+NAME                        READY   STATUS    RESTARTS   AGE
+spam-api-6f567468bb-hlsnr   0/1     Running   0          4s
+spam-api-6f567468bb-jmgs8   1/1     Running   0          63m

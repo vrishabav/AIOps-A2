@@ -1,0 +1,10 @@
+$ python3 collect_shard_results.py
+{'shard_index': 0, 'total_rows': 50, 'invalid_rows': 11, 'pod_name': 'validate-shards-job-0-rbvbk', 'node_name': 'minikube-m03'}
+{'shard_index': 1, 'total_rows': 50, 'invalid_rows': 7, 'pod_name': 'validate-shards-job-1-bvdc4', 'node_name': 'minikube-m02'}
+{'shard_index': 2, 'total_rows': 50, 'invalid_rows': 11, 'pod_name': 'validate-shards-job-2-7pvt9', 'node_name': 'minikube-m02'}
+{'shard_index': 3, 'total_rows': 50, 'invalid_rows': 10, 'pod_name': 'validate-shards-job-3-nc2gs', 'node_name': 'minikube-m03'}
+{'shard_index': 4, 'total_rows': 50, 'invalid_rows': 8, 'pod_name': 'validate-shards-job-4-qbq8v', 'node_name': 'minikube-m03'}
+{'shard_index': 5, 'total_rows': 50, 'invalid_rows': 7, 'pod_name': 'validate-shards-job-5-rx5pp', 'node_name': 'minikube-m02'}
+{'shard_index': 6, 'total_rows': 50, 'invalid_rows': 7, 'pod_name': 'validate-shards-job-6-r75rw', 'node_name': 'minikube-m02'}
+{'shard_index': 7, 'total_rows': 50, 'invalid_rows': 13, 'pod_name': 'validate-shards-job-7-9x6hv', 'node_name': 'minikube-m03'}
+Total invalid rows across all shards: 74

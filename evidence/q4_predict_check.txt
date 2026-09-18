@@ -1,0 +1,42 @@
+$ kubectl apply -f k8s/q4/redis.yaml
+deployment.apps/cache created
+service/cache created
+
+$ kubectl get pods -l app=cache -w
+NAME                     READY   STATUS              RESTARTS   AGE
+cache-749988c4c8-tx5xh   0/1     ContainerCreating   0          2s
+cache-749988c4c8-tx5xh   1/1     Running             0          6s
+
+$ curl -X POST http://$(minikube ip):30090/predict -H "Content-Type: application/json" -d '{"text": "WIN a FREE iPhone now!"}'
+{"label":"spam"}
+$ curl -X POST http://$(minikube ip):30090/predict -H "Content-Type: application/json" -d '{"text": "WIN a FREE iPhone now!"}'
+{"label":"spam"}
+$ curl -X POST http://$(minikube ip):30090/predict -H "Content-Type: application/json" -d '{"text": "WIN a FREE iPhone now!"}'
+{"label":"spam"}
+
+$ kubectl logs -l app=spam-api --tail 20
+INFO:     10.244.1.1:51708 - "GET /healthz HTTP/1.1" 200 OK
+INFO:     10.244.1.1:51716 - "GET /healthz HTTP/1.1" 200 OK
+[cache] MISS key=predict:c829015a9a9f4457d7ff67e5b7f81f3c167897b73c98cc1191dbdbab42ccda7d
+INFO:     192.168.49.2:18352 - "POST /predict HTTP/1.1" 200 OK
+INFO:     10.244.1.1:42552 - "GET /healthz HTTP/1.1" 200 OK
+[cache] HIT key=predict:c829015a9a9f4457d7ff67e5b7f81f3c167897b73c98cc1191dbdbab42ccda7d
+INFO:     192.168.49.2:40589 - "POST /predict HTTP/1.1" 200 OK
+INFO:     10.244.1.1:42558 - "GET /healthz HTTP/1.1" 200 OK
+INFO:     10.244.1.1:53344 - "GET /healthz HTTP/1.1" 200 OK
+INFO:     10.244.1.1:53348 - "GET /healthz HTTP/1.1" 200 OK
+INFO:     10.244.1.1:36444 - "GET /healthz HTTP/1.1" 200 OK
+INFO:     10.244.1.1:36458 - "GET /healthz HTTP/1.1" 200 OK
+INFO:     10.244.1.1:39702 - "GET /healthz HTTP/1.1" 200 OK
+INFO:     10.244.1.1:39714 - "GET /healthz HTTP/1.1" 200 OK
+INFO:     10.244.1.1:40518 - "GET /healthz HTTP/1.1" 200 OK
+INFO:     10.244.1.1:40534 - "GET /healthz HTTP/1.1" 200 OK
+INFO:     10.244.1.1:49734 - "GET /healthz HTTP/1.1" 200 OK
+INFO:     10.244.1.1:49746 - "GET /healthz HTTP/1.1" 200 OK
+INFO:     10.244.1.1:57210 - "GET /healthz HTTP/1.1" 200 OK
+INFO:     10.244.1.1:57216 - "GET /healthz HTTP/1.1" 200 OK
+INFO:     10.244.2.1:49596 - "GET /healthz HTTP/1.1" 200 OK
+
+
+Note:
+The MISS then HIT pair for the same key confirms that the cache fix works

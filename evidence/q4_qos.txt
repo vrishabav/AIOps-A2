@@ -1,0 +1,109 @@
+$ kubectl describe pod -l app=spam-api
+Name:             spam-api-6f567468bb-hlsnr
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             minikube-m03/192.168.49.4
+Start Time:       Fri, 18 Sep 2026 16:24:18 +0530
+Labels:           app=spam-api
+                  pod-template-hash=6f567468bb
+Annotations:      kubectl.kubernetes.io/restartedAt: 2026-09-18T14:58:23+05:30
+Status:           Running
+IP:               10.244.2.19
+IPs:
+  IP:           10.244.2.19
+Controlled By:  ReplicaSet/spam-api-6f567468bb
+Containers:
+  api:
+    Container ID:   containerd://babbe578ee97abd5b23292f43808e8070b7a72a5f3450f387274017385f64cae
+    Image:          spam-api:v2
+    Image ID:       sha256:2e24e865479bebc048b4371856595a2028ff9d9b82c4db39ad5aecc8ad929669
+    Port:           8000/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Fri, 18 Sep 2026 16:24:18 +0530
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     500m
+      memory:  512Mi
+    Requests:
+      cpu:        250m
+      memory:     256Mi
+    Readiness:    http-get http://:8000/healthz delay=3s timeout=1s period=5s successThreshold=1 failureThreshold=3
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-x8djn (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True
+  Initialized                 True
+  Ready                       True
+  ContainersReady             True
+  PodScheduled                True
+Volumes:
+  kube-api-access-x8djn:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:             spam-api-6f567468bb-jmgs8
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             minikube-m02/192.168.49.3
+Start Time:       Fri, 18 Sep 2026 15:20:55 +0530
+Labels:           app=spam-api
+                  pod-template-hash=6f567468bb
+Annotations:      kubectl.kubernetes.io/restartedAt: 2026-09-18T14:58:23+05:30
+Status:           Running
+IP:               10.244.1.14
+IPs:
+  IP:           10.244.1.14
+Controlled By:  ReplicaSet/spam-api-6f567468bb
+Containers:
+  api:
+    Container ID:   containerd://6015123b4ee060fe659374e3a21dc22943b2350c069d1eb160fbae89b7caa610
+    Image:          spam-api:v2
+    Image ID:       sha256:2e24e865479bebc048b4371856595a2028ff9d9b82c4db39ad5aecc8ad929669
+    Port:           8000/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Fri, 18 Sep 2026 15:28:32 +0530
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     500m
+      memory:  512Mi
+    Requests:
+      cpu:        250m
+      memory:     256Mi
+    Readiness:    http-get http://:8000/healthz delay=3s timeout=1s period=5s successThreshold=1 failureThreshold=3
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-gkgjz (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True
+  Initialized                 True
+  Ready                       True
+  ContainersReady             True
+  PodScheduled                True
+Volumes:
+  kube-api-access-gkgjz:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s

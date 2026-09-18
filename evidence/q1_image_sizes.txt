@@ -1,0 +1,7 @@
+$ docker images spam-api-singlestage
+IMAGE                         ID             DISK USAGE   CONTENT SIZE   EXTRA
+spam-api-singlestage:latest   581f38fc0ef8       2.15GB          532MB
+
+$ docker images spam-api-multistage
+IMAGE                        ID             DISK USAGE   CONTENT SIZE   EXTRA
+spam-api-multistage:latest   b4b6cab02786        729MB          166MB

@@ -1,0 +1,23 @@
+$ kubectl get jobs
+NAME                  STATUS     COMPLETIONS   DURATION   AGE
+validate-shards-job   Complete   8/8           6s         3h14m
+
+$ kubectl delete -f validate_shards.yaml
+job.batch "validate-shards-job" deleted from default namespace
+
+$ kubectl apply -f validate_shards.yaml
+job.batch/validate-shards-job created
+
+$ kubectl get pods -o wide
+NAME                          READY   STATUS      RESTARTS   AGE     IP            NODE           NOMINATED NODE   READINESS GATES
+cache-749988c4c8-tx5xh        1/1     Running     0          10m     10.244.2.14   minikube-m03   <none>           <none>
+spam-api-6f567468bb-jmgs8     1/1     Running     0          58m     10.244.1.14   minikube-m02   <none>           <none>
+spam-api-6f567468bb-rlbhw     1/1     Running     0          51m     10.244.2.13   minikube-m03   <none>           <none>
+validate-shards-job-0-rbvbk   0/1     Completed   0          3m26s   10.244.2.15   minikube-m03   <none>           <none>
+validate-shards-job-1-bvdc4   0/1     Completed   0          3m26s   10.244.1.15   minikube-m02   <none>           <none>
+validate-shards-job-2-7pvt9   0/1     Completed   0          3m26s   10.244.1.16   minikube-m02   <none>           <none>
+validate-shards-job-3-nc2gs   0/1     Completed   0          3m26s   10.244.2.16   minikube-m03   <none>           <none>
+validate-shards-job-4-qbq8v   0/1     Completed   0          3m23s   10.244.2.17   minikube-m03   <none>           <none>
+validate-shards-job-5-rx5pp   0/1     Completed   0          3m23s   10.244.1.17   minikube-m02   <none>           <none>
+validate-shards-job-6-r75rw   0/1     Completed   0          3m23s   10.244.1.18   minikube-m02   <none>           <none>
+validate-shards-job-7-9x6hv   0/1     Completed   0          3m23s   10.244.2.18   minikube-m03   <none>           <none>
