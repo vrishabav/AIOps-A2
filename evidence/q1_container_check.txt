@@ -1,0 +1,22 @@
+Single-stage image - container runs and serves both endpoints:
+
+$ docker run -d -p 8000:8000 --name singlestage-test spam-api-singlestage
+1b69e6c2e427c6630db4460202d533cbac5a074b4ebae8f584f6c6db963843e2
+
+$ curl localhost:8000/healthz
+{"status":"ok"}
+
+$ curl -X POST localhost:8000/predict -H "Content-Type: application/json" -d '{"text": "URGENT: Verify at bit.ly/xyz123"}'
+{"label":"spam"}
+
+
+Multi-stage image - identical behaviour (mapped to host port 8001):
+
+$ docker run -d -p 8001:8000 --name multistage-test spam-api-multistage
+6ee9c0e4db14071e81bfa8b5c03b9cf60a8322ea915e565b770fb35e18a6a4f1
+
+$ curl localhost:8001/healthz
+{"status":"ok"}
+
+$ curl -X POST localhost:8001/predict -H "Content-Type: application/json" -d '{"text": "URGENT: Verify at bit.ly/xyz123"}'
+{"label":"spam"}
